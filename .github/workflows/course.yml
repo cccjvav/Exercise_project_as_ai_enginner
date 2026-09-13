@@ -1,0 +1,25 @@
+#: 8A：只跑无密钥测试；pull_request 不获得生产密钥或模型费用权限。
+name: Course checks
+on: [push, pull_request]
+#: 最小权限只读仓库；测试不需要向 GitHub 或生产服务写入。
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    steps:
+      #: 按当前提交检出并固定 Python/Node 主版本；生产可进一步固定 action 提交摘要。
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      #: 先安装已测试依赖快照，再注册本地包；前端使用 npm lock 复现编译。
+      - run: pip install -r requirements-tested.lock.txt && pip install --no-deps -e .
+      - run: npm --prefix frontend ci --ignore-scripts && npm --prefix frontend run build
+      #: 不调用在线模型；本地源码同步检查防止教材示例与实际实现漂移。
+      - run: python -m pytest -q
+      - run: python tools/check_course.py
+      - run: python -m evidencedesk.evaluate --k 1

@@ -1,0 +1,54 @@
+# 教材与示例验证记录
+
+日期：2026-09-13。记录的是**导师参考实现的技术验证**，不是学习者已掌握或生产验收通过。
+
+## 已运行
+
+环境：Linux、Python 3.11；精确 Python 依赖见仓库 `requirements-tested.lock.txt`，TypeScript 由 `frontend/package-lock.json` 固定。
+
+| 验证项 | 实际结果 | 范围与限制 |
+|---|---|---|
+| `python -m pytest -q` | **38 passed** | 含核心、API、Qdrant、LangGraph、MCP 和 PDF 文本提取；不调用在线模型 |
+| `npm --prefix frontend ci --ignore-scripts` / `npm --prefix frontend run build` | 安装/编译通过 | 不等于真实浏览器端到端交互验收 |
+| 检索基线 k=1/3 | Recall=MRR=5/6；无答案空返回率=1 | 仅 8 条公开开发题，q06 有隐含 Webhook 上下文 |
+| Qdrant | 内存 collection、查询、租户过滤通过 | 向量为手工几何夹具，不是语义模型效果 |
+| LangGraph | 暂停后批准、拒绝、非布尔拒绝通过 | 只有内存 checkpoint，未测跨进程数据库恢复 |
+| 工单 | 未审批/越权/改草稿拒绝；重试与文件数据库重开幂等通过 | SQLite 模拟，不是外部 API exactly-once 保证 |
+| MCP | stdio 初始化、发现与工具调用通过 | 只读公开虚构资料，无远程鉴权 |
+| PDF | 生成虚构 PDF、提取文本、空页明确报错通过 | 不提供 OCR，不保证真实 PDF 的阅读顺序 |
+| 课程校验 | 22 节、源码副本、本地链接、Python 语法 | 不自动核验外部链接或在线供应商 API |
+
+pytest 当前有一条 Starlette/AnyIO 的弃用警告，不影响用例通过；后续升级需检查兼容性，不隐藏警告。
+
+## 已发现的阻塞，不伪装为成功
+
+`tiktoken.get_encoding("cl100k_base")` 首次下载编码表时，本环境到 `openaipublic.blob.core.windows.net` 出现 TLS 连接关闭错误。我们没有关闭 TLS 校验绕过。PDF 提取/空页路径已测，完整 token 计数路径仍待网络可用后验证。
+
+## 未执行或未完成
+
+- 在线 OpenAI embedding/chat、Ragas 裁判、托管 LangSmith 上传、Deep Agents 付费运行。
+- sentence-transformers/BGE/cross-encoder 下载与真实多查询重排序效果；相应脚本是完整参考，但未运行。
+- Deep Agents / Ragas 的额外安装组合未做环境兼容验收；不要因为语法校验通过就称 API 已验证。
+- PostgreSQL schema 的实际角色/RLS 事务验证、Redis 真实连接、持久化图状态。
+- Docker 镜像构建/运行：当前工作区没有 Docker 命令；提供文件和清晰的本机操作步骤。
+- 云部署、真实 OIDC/JWT、真实工单 API、浏览器交互 E2E、负载/安全审计。
+- GitHub Actions 远端状态须在推送后到仓库检查；本地通过不代表远端已完成。
+
+## 复现已测试的部分
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements-tested.lock.txt
+python -m pip install --no-deps -e .
+npm --prefix frontend ci --ignore-scripts
+npm --prefix frontend run build
+python -m pytest -q
+python tools/check_course.py
+python -m evidencedesk.evaluate --k 1
+python -m evidencedesk.evaluate --k 3
+```
+
+Windows 使用对应虚拟环境激活命令。首次安装/下载需要网络；依赖快照仅代表当前测试平台，不是所有系统的保证。
+
+新增学习改动后重新执行，而不是沿用本页数字。未经执行的课程实操标待验，进度由导师与你共同确认。

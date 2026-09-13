@@ -28,3 +28,6 @@ logs/
 node_modules/
 .next/
 .DS_Store
+
+# Reproducible frontend output and generated course experiment results
+frontend/client.js
