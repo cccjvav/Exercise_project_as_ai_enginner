@@ -2,10 +2,55 @@
 
 [全部课程](../course/index.md) · [上一课](01c-lexical-search.md) · [下一课](01e-evaluation.md)
 
+- **学习进度：** 进行中；从最小 pytest 用例与一次可控回归开始，学习者实操尚未验收。
 - **前置理解：** 1C：理解 search 的输入输出
 - **验证状态：** CLI 和 pytest 已运行；不需要模型密钥。
 - **节奏：** 建议拆成“读例子/讲解”和“关键实操/复盘”两次，每次 20–45 分钟；遇到不懂的一行就停下问。
 - **学习规则：** 教材已提前备齐不代表你已通过；无需先独立写实现。跨阶段前仍需你确认。
+
+## 当前跟做：让测试发现一次可控回归（待完成）
+
+这是本课的第一小步：把已经理解的“大小写归一化与词去重”写成自动检查，不要求从空白设计测试。
+
+1. 在之前的 Python 虚拟环境、仓库根目录安装测试依赖：
+
+```bash
+python -m pip install -e ".[dev]"
+```
+
+`dev` 是 `pyproject.toml` 里的一组可选开发依赖，本项目包含 pytest；不会调用模型。
+
+2. 新建 `tests/test_learning_tokens.py`，粘贴完整示例：
+
+```python
+from evidencedesk.search import tokens
+
+
+def test_tokens_ignore_case_and_duplicates():
+    actual = tokens("WEBHOOK 重试 重试")
+    expected = {"webhook", "重试"}
+    assert actual == expected
+```
+
+- 导入项目现有函数，不在测试中复制一份实现。
+- `test_` 开头的函数可被 pytest 自动发现并执行；不需要自己在文件底部调用。
+- `actual` 是程序真实返回，`expected` 是你根据已确认规则写下的预期。
+- `assert` 表达“这里必须相等”；不相等就让测试失败，并展示差异。
+
+3. 只运行这一个测试文件：
+
+```bash
+python -m pytest tests/test_learning_tokens.py -q
+```
+
+预期摘要包含 `1 passed`。`-q` 让输出简洁，不改变测试行为。
+
+4. 故意制造一个容易恢复的回归：打开 `src/evidencedesk/search.py`，只在 `tokens()` 的返回行中，将 `text.casefold()` 临时改为 `text`。保存后重新运行同一条测试命令，预期 `1 failed`；`WEBHOOK` 不再转为小写，实际集合会漏掉 `webhook`。
+5. 将这一处恢复为 `text.casefold()`，保存并再次运行，预期回到 `1 passed`。最后确认生产代码已经恢复。
+
+这是为了观察测试如何发现回归，不是要求保留坏代码，也不是完整的“先写失败测试再实现功能”的 TDD 流程。不要改正确的 `expected` 去迁就错误实现。如果命令或导入报错，先定位环境问题，不把它和断言失败混为一谈。
+
+提交三次摘要（通过→失败→恢复通过），以及一句话说明该测试防住了什么。原有测试无需删除；新用例将作为学习者按步骤添加的练习保留。
 
 ## 1. 问题：现在为什么需要它？
 
