@@ -4,8 +4,8 @@
 <title>EvidenceDesk · 课程演示</title>
 <style>body{max-width:760px;margin:60px auto;padding:20px;background:#f4f5f1;color:#183d3b;font:17px/1.7 system-ui}input,select,button{font:inherit;padding:8px;margin:6px 0}input{width:90%}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:20px;border-radius:10px}small{color:#58655e}</style>
 <h1>EvidenceDesk</h1><p>候选证据检索 · 不是模型回答</p>
-<small>仅用于虚构资料。固定演示令牌公开可见，不能用作生产身份认证。</small>
+<small>仅用于虚构资料。选择下方演示用户即可，无需 Agnes 或 Hugging Face API Key。公开演示身份不能用作生产认证。</small>
 <form id="search-form"><label>演示用户 <select id="token"><option value="demo-alice">Alice / alpha</option><option value="demo-bob">Bob / beta</option></select></label><br><label>问题 <input id="question" value="Webhook 重试多少次？" required maxlength="1000"></label><br><button>检索</button><button type="button" id="cancel">取消</button></form>
 <pre id="output" role="status" aria-live="polite">输入问题，查看原文依据。</pre>
-<script type="module" src="/client.js"></script>
+<script type="module" src="/client.js?v=demo-header-v2"></script>
 </html>

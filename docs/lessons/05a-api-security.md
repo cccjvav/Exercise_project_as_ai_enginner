@@ -7,6 +7,8 @@
 - **节奏：** 建议拆成“读例子/讲解”和“关键实操/复盘”两次，每次 20–45 分钟；遇到不懂的一行就停下问。
 - **学习规则：** 教材已提前备齐不代表你已通过；无需先独立写实现。跨阶段前仍需你确认。
 
+> **预览兼容性更新：** 浏览器现用 `X-Demo-Token` 传递公开演示身份，避免与宿主的 `Authorization` 处理冲突；旧 CLI 的 Bearer 示例仍兼容。此机制只在 `EVIDENCEDESK_DEMO=1` 下生效，不是生产认证，也绝不能拿真实模型 Key 代替。
+
 ## 1. 问题：现在为什么需要它？
 
 多个支持人员同时使用时，不同人不能看到同一套全部文档。将 search 包成接口还不够：身份必须由服务端确定，权限过滤必须先于检索和引用展示。
@@ -45,13 +47,16 @@ app = FastAPI(title="EvidenceDesk · 候选证据演示")
 DEMO_IDENTITIES = {"demo-alice": "alpha", "demo-bob": "beta"}
 ACL = {"alpha": {"webhook-delivery", "api-key-policy"}, "beta": {"incident-escalation"}}
 
-#: 默认关闭演示身份；显式启用后也只能用虚构数据。身份映射由服务端决定。
-def identity(authorization: str = Header(default="")) -> str:
+#: 演示专用头避开预览代理可能占用的 Authorization；仅显式启用虚构演示时生效。
+def identity(authorization: str = Header(default=""),
+             demo_token: str | None = Header(default=None, alias="X-Demo-Token")) -> str:
     if os.environ.get("EVIDENCEDESK_DEMO") != "1":
         raise HTTPException(503, "虚构数据演示需设置 EVIDENCEDESK_DEMO=1；不是生产鉴权")
-    tenant = DEMO_IDENTITIES.get(authorization[7:]) if authorization.startswith("Bearer ") else None
+    #: 专用头存在时只校验该值，不因它无效就回退；Bearer 保留给旧 CLI 示例。
+    token = demo_token if demo_token is not None else (authorization[7:] if authorization.startswith("Bearer ") else None)
+    tenant = DEMO_IDENTITIES.get(token)
     if tenant is None:
-        raise HTTPException(401, "缺少有效演示令牌")
+        raise HTTPException(401, "缺少或无效的演示身份；刷新页面并重新选择用户，无需 Agnes API Key")
     return tenant
 
 #: 限制输入长度和 k；strict 防止 True 或字符串被自动转换成整数。
@@ -88,11 +93,12 @@ app.mount("/", StaticFiles(directory=ROOT / "frontend", html=True), name="fronte
 |---|---|
 | 1–12 | 真实 FastAPI 接口，但只服务虚构手册；固定演示令牌不是生产身份体系。 |
 | 13–18 | 此源码布局依赖 editable install 和仓库目录；不能把单独 wheel 当完整部署包。 |
-| 19–27 | 默认关闭演示身份；显式启用后也只能用虚构数据。身份映射由服务端决定。 |
-| 28–36 | 限制输入长度和 k；strict 防止 True 或字符串被自动转换成整数。 |
-| 37–42 | 先按服务端身份筛可见文档再检索；不能搜完整库后让模型决定权限。 |
-| 43–51 | 演示 SSE 帧格式，不是 LLM token 流；先完成检索再发 evidence 和 done 两个事件。 |
-| 52–53 | 静态挂载在 API 路由之后；前端 fetch 相对路径，同源无需宽泛开放 CORS。 |
+| 19–23 | 演示专用头避开预览代理可能占用的 Authorization；仅显式启用虚构演示时生效。 |
+| 24–30 | 专用头存在时只校验该值，不因它无效就回退；Bearer 保留给旧 CLI 示例。 |
+| 31–39 | 限制输入长度和 k；strict 防止 True 或字符串被自动转换成整数。 |
+| 40–45 | 先按服务端身份筛可见文档再检索；不能搜完整库后让模型决定权限。 |
+| 46–54 | 演示 SSE 帧格式，不是 LLM token 流；先完成检索再发 evidence 和 done 两个事件。 |
+| 55–56 | 静态挂载在 API 路由之后；前端 fetch 相对路径，同源无需宽泛开放 CORS。 |
 
 ### `tests/test_api.py`
 
@@ -129,13 +135,69 @@ def test_auth_acl_and_sse(client):
     assert "event: evidence\n" in stream.text and stream.text.endswith('event: done\ndata: {}\n\n')
     for k in [0, True, "3", 11]:
         assert client.post("/api/search", json={"question": "工单", "k": k}, headers=b).status_code == 422
+
+#: 浏览器的专用演示头必须保持双向 ACL，而不是遇到 401 就关闭身份检查。
+@pytest.mark.parametrize("token,query,ids", [
+    ("demo-alice", "Webhook", ["webhook-delivery"]),
+    ("demo-bob", "Webhook", []),
+    ("demo-bob", "工单", ["incident-escalation"]),
+    ("demo-alice", "工单", []),
+])
+def test_demo_header_acl(client, token, query, ids):
+    response = client.post("/api/search", headers={"X-Demo-Token": token}, json={"question": query})
+    assert response.status_code == 200
+    assert [hit["document_id"] for hit in response.json()] == ids
+
+
+#: 无效专用头不回退到另一套凭据；关闭演示模式时，两种头都不能启用接口。
+@pytest.mark.parametrize("token", ["", "unknown", "Bearer demo-alice"])
+def test_invalid_demo_header_does_not_fall_back(client, token):
+    response = client.post("/api/search", headers={"X-Demo-Token": token, "Authorization": "Bearer demo-alice"},
+                           json={"question": "Webhook"})
+    assert response.status_code == 401
+
+
+def test_demo_header_still_requires_explicit_mode(client, monkeypatch):
+    monkeypatch.delenv("EVIDENCEDESK_DEMO")
+    response = client.post("/api/search", headers={"X-Demo-Token": "demo-alice"}, json={"question": "Webhook"})
+    assert response.status_code == 503
+
+
+#: 模拟代理剥离 Authorization，验证专用头仍可用；这不是对真实代理行为的直接观测。
+def test_preview_transport_with_authorization_stripped(monkeypatch):
+    # Model the suspected proxy behavior, without claiming this observes the real proxy.
+    class StripAuthorization:
+        def __init__(self, wrapped):
+            self.wrapped = wrapped
+
+        async def __call__(self, scope, receive, send):
+            if scope["type"] == "http":
+                scope = {**scope, "headers": [(k, v) for k, v in scope["headers"] if k.lower() != b"authorization"]}
+            await self.wrapped(scope, receive, send)
+
+    monkeypatch.setenv("EVIDENCEDESK_DEMO", "1")
+    with TestClient(StripAuthorization(app)) as proxied:
+        payload = {"question": "Webhook"}
+        assert proxied.post("/api/search", headers={"Authorization": "Bearer demo-alice"}, json=payload).status_code == 401
+        response = proxied.post("/api/search", headers={"X-Demo-Token": "demo-alice"}, json=payload)
+        assert response.status_code == 200 and response.json()[0]["document_id"] == "webhook-delivery"
+        events = proxied.post("/api/events", headers={"X-Demo-Token": "demo-alice"}, json=payload)
+        assert events.status_code == 200 and "event: evidence" in events.text
+
+
+def test_proxy_authorization_can_coexist_with_demo_header(client):
+    response = client.post("/api/search", headers={"Authorization": "Bearer proxy-owned-placeholder", "X-Demo-Token": "demo-bob"},
+                           json={"question": "工单"})
+    assert response.status_code == 200 and response.json()[0]["document_id"] == "incident-escalation"
 ```
 
 #### 逐行 / 相邻语句讲解
 
 | 源码行 | 为什么这样写、数据如何变化 |
 |---|---|
-| 全文件 | 配置字段按小课原理和下面的操作步骤解释；不需要默写，修改后以构建和测试验证。 |
+| 31–43 | 浏览器的专用演示头必须保持双向 ACL，而不是遇到 401 就关闭身份检查。 |
+| 44–57 | 无效专用头不回退到另一套凭据；关闭演示模式时，两种头都不能启用接口。 |
+| 58–83 | 模拟代理剥离 Authorization，验证专用头仍可用；这不是对真实代理行为的直接观测。 |
 
 ## 4. 跟着运行与关键实操
 

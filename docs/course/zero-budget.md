@@ -176,6 +176,14 @@ Docker Space 的端口在 README 的 YAML `app_port` 与服务监听端口中一
 
 公开固定令牌只展示虚构资料。**不要在未做真实认证/限流之前，将 Agnes 调用加进这个公开接口。** 未来模型 Key 放 Secrets，数据库用托管服务，不把免费 Space 的临时磁盘当永久 PostgreSQL 存储。
 
+## 预览若显示 401，先不要填写任何模型 Key
+
+正常从页面选择 Alice/Bob 后，检索应得到 200。Alice 搜 Webhook 应有依据，Bob 搜 Webhook 应是 200 加空列表，Bob 搜工单应有依据。401 是演示身份未通过，不是“知识库没有答案”，也与 Agnes Key 无关。
+
+浏览器已改用 `X-Demo-Token` 发送公开演示令牌，避开宿主可能处理的 `Authorization`。请刷新/重新打开预览，必要时 Ctrl+Shift+R（macOS Cmd+Shift+R）；不要在此头填真实 API Key。模拟代理剥离头的测试已通过，真实预览仍以浏览器复测为准。
+
+你可以提供去敏后的错误文字、模型名、额度或配置项名称帮助排错；完整 Key 放本机环境变量或 HF Settings → Secrets。GitHub/HF 登录凭据与访问令牌也无需放聊天。当前网页并未启用真实 Agnes 调用，仅保存 Key 不会让它变成模型聊天应用。
+
 ## 4. 接下来只做一个动作即可
 
 你不需要同时弄懂三个平台。建议先选：

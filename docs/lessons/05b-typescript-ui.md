@@ -7,6 +7,8 @@
 - **节奏：** 建议拆成“读例子/讲解”和“关键实操/复盘”两次，每次 20–45 分钟；遇到不懂的一行就停下问。
 - **学习规则：** 教材已提前备齐不代表你已通过；无需先独立写实现。跨阶段前仍需你确认。
 
+> **401 排查实例：** 页面选择用户后不应全部 401；本轮新增专用演示请求头和缓存版本。`401` 是身份校验失败，`200 + []` 才是正常的无匹配/无可见证据；两者都不需要填写 Agnes Key。
+
 ## 1. 问题：现在为什么需要它？
 
 用户需要看到原文、来源和失败状态，而不是原始 JSON。多次点击时旧响应可能覆盖新结果，模型返回的 HTML 也可能成为脚本注入入口。
@@ -43,15 +45,21 @@ form.addEventListener("submit", async (event) => {
   const question = document.querySelector<HTMLInputElement>("#question")!.value;
   const token = document.querySelector<HTMLSelectElement>("#token")!.value;
   output.textContent = "正在检索…";
-  //: 相对 URL 访问同源 API，不把浏览器的 localhost 错当成远程服务器。
+  //: 使用演示专用头，避免预览代理对 Authorization 的处理；这里绝不能放真实模型密钥。
   try {
     const response = await fetch("/api/search", {
       method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      headers: { "Content-Type": "application/json", "X-Demo-Token": token },
       body: JSON.stringify({ question, k: 3 }),
       signal: controller.signal,
     });
-    if (!response.ok) throw new Error(`请求失败：HTTP ${response.status}`);
+    if (!response.ok) {
+      const hint = response.status === 401 ? "演示身份校验失败，请刷新页面后重新选择用户；无需 Agnes API Key。"
+        : response.status === 503 ? "服务端尚未启用虚构数据演示模式。"
+        : response.status === 422 ? "查询参数无效，请检查问题和结果数量。"
+        : "服务暂时不可用，请稍后重试。";
+      throw new Error(`HTTP ${response.status}：${hint}`);
+    }
     const hits: Hit[] = await response.json();
     //: 旧请求不能覆盖新结果；textContent 将内容当文本而非 HTML，减少 XSS 风险。
     if (active !== controller) return;
@@ -71,8 +79,8 @@ form.addEventListener("submit", async (event) => {
 |---|---|
 | 1–6 | 类型用于编译期检查；网络返回 JSON 的运行时校验在生产版还需补充。 |
 | 7–16 | 取消当前请求；可选链在尚无请求时不会报错。 |
-| 17–26 | 相对 URL 访问同源 API，不把浏览器的 localhost 错当成远程服务器。 |
-| 27–36 | 旧请求不能覆盖新结果；textContent 将内容当文本而非 HTML，减少 XSS 风险。 |
+| 17–32 | 使用演示专用头，避免预览代理对 Authorization 的处理；这里绝不能放真实模型密钥。 |
+| 33–42 | 旧请求不能覆盖新结果；textContent 将内容当文本而非 HTML，减少 XSS 风险。 |
 
 ## 4. 跟着运行与关键实操
 

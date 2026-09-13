@@ -8,7 +8,7 @@
 
 | 验证项 | 实际结果 | 范围与限制 |
 |---|---|---|
-| `python -m pytest -q` | **53 passed** | 含核心、API、Qdrant、LangGraph、MCP 和 PDF 文本提取；不调用在线模型 |
+| `python -m pytest -q` | **63 passed** | 含核心、API、Qdrant、LangGraph、MCP 和 PDF 文本提取；不调用在线模型 |
 | `npm --prefix frontend ci --ignore-scripts` / `npm --prefix frontend run build` | 安装/编译通过 | 不等于真实浏览器端到端交互验收 |
 | 检索基线 k=1/3 | Recall=MRR=5/6；无答案空返回率=1 | 仅 8 条公开开发题，q06 有隐含 Webhook 上下文 |
 | Qdrant | 内存 collection、查询、租户过滤通过 | 向量为手工几何夹具，不是语义模型效果 |
@@ -22,6 +22,10 @@
 | 课程校验 | 22 节、源码副本、本地链接、Python 语法 | 不自动核验外部链接或在线供应商 API |
 
 pytest 当前有一条 Starlette/AnyIO 的弃用警告，不影响用例通过；后续升级需检查兼容性，不隐藏警告。
+
+## 预览 401 修正
+
+用户反馈预览页面请求全部 401；服务器日志确认代理来源请求连续 401，而本机带 Bearer 演示令牌为 200。当前最可疑的是预览链路对 Authorization 的处理，**尚未直接观测真实代理如何更改该头**。浏览器已改用 X-Demo-Token，后端仅在显式演示模式下校验固定令牌；保留旧 Bearer CLI，不关闭身份/ACL 校验。新增模拟剥离 Authorization、无效令牌、双向 ACL 和关闭演示模式测试；模拟通过不能替代用户实际浏览器复测。已重新编译并重启预览，脚本 URL 带新版本以避开旧缓存。
 
 ## 已发现的阻塞，不伪装为成功
 

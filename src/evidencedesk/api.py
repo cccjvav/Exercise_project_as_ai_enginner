@@ -16,13 +16,16 @@ app = FastAPI(title="EvidenceDesk · 候选证据演示")
 DEMO_IDENTITIES = {"demo-alice": "alpha", "demo-bob": "beta"}
 ACL = {"alpha": {"webhook-delivery", "api-key-policy"}, "beta": {"incident-escalation"}}
 
-#: 默认关闭演示身份；显式启用后也只能用虚构数据。身份映射由服务端决定。
-def identity(authorization: str = Header(default="")) -> str:
+#: 演示专用头避开预览代理可能占用的 Authorization；仅显式启用虚构演示时生效。
+def identity(authorization: str = Header(default=""),
+             demo_token: str | None = Header(default=None, alias="X-Demo-Token")) -> str:
     if os.environ.get("EVIDENCEDESK_DEMO") != "1":
         raise HTTPException(503, "虚构数据演示需设置 EVIDENCEDESK_DEMO=1；不是生产鉴权")
-    tenant = DEMO_IDENTITIES.get(authorization[7:]) if authorization.startswith("Bearer ") else None
+    #: 专用头存在时只校验该值，不因它无效就回退；Bearer 保留给旧 CLI 示例。
+    token = demo_token if demo_token is not None else (authorization[7:] if authorization.startswith("Bearer ") else None)
+    tenant = DEMO_IDENTITIES.get(token)
     if tenant is None:
-        raise HTTPException(401, "缺少有效演示令牌")
+        raise HTTPException(401, "缺少或无效的演示身份；刷新页面并重新选择用户，无需 Agnes API Key")
     return tenant
 
 #: 限制输入长度和 k；strict 防止 True 或字符串被自动转换成整数。
