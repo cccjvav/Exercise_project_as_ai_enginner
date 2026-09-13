@@ -1,0 +1,30 @@
+# Python and local environments
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+build/
+dist/
+.coverage
+htmlcov/
+
+# Secrets and local config
+.env
+.env.*
+!.env.example
+
+# Generated data / indexes / runs (keep curated fixtures tracked)
+data/raw/
+data/processed/
+data/indexes/
+artifacts/
+runs/
+logs/
+
+# Frontend / editors
+node_modules/
+.next/
+.DS_Store
