@@ -2,6 +2,7 @@
 
 [全部课程](../course/index.md) · [上一课](01a-read-document.md) · [下一课](01c-lexical-search.md)
 
+- **学习进度：** 进行中；已答对空列表与 `or` 短路题，其他内容尚未验收。
 - **前置理解：** 1A：理解文件、字符串和行列表
 - **验证状态：** 离线参考实现；已纳入 pytest。
 - **节奏：** 建议拆成“读例子/讲解”和“关键实操/复盘”两次，每次 20–45 分钟；遇到不懂的一行就停下问。
@@ -142,3 +143,38 @@ python -m pytest tests/test_search.py -q
 - https://docs.pytest.org/en/stable/how-to/tmp_path.html
 
 外部教程可能使用不同版本；优先对照本仓库依赖记录和官方迁移文档，不要求通读整站。
+
+
+## 已完成问答与标准答案
+
+记录日期：2026-09-13。正确回答一题，只记录对应知识点通过，不自动视为整节 1B 已掌握。
+
+### 1B-Q1：空列表会触发哪一种异常？
+
+**题目：** 当 `lines = []` 时，下面的代码会发生什么？
+
+```python
+if not lines or not lines[0].startswith("# "):
+    raise ValueError("第一行必须是 # 标题")
+
+title = lines[0][2:].strip()
+```
+
+- **A：** 访问 `lines[0]`，触发 `IndexError`。
+- **B：** 不访问 `lines[0]`，主动抛出 `ValueError`。
+
+**学习者回答：** B。
+
+**判断：** 正确。
+
+**标准答案：** 空列表在布尔判断中是假值，所以 `not lines` 为 `True`。Python 的 `or` 从左向右求值，左侧为真时发生短路，不再计算右侧的 `lines[0]`。条件成立，进入 `if`，由 `raise` 主动抛出 `ValueError`。在这段代码中异常没有被捕获，因此后面的标题提取语句不会执行。
+
+| 执行顺序 | 本题中的结果 |
+|---|---|
+| 判断 `not lines` | `True` |
+| 是否计算 `not lines[0].startswith("# ")` | 否，`or` 短路 |
+| 是否进入 `if` | 是 |
+| 抛出的异常 | 主动抛出 `ValueError`，而非索引访问导致的 `IndexError` |
+| 是否执行后面的 `title = ...` | 否 |
+
+**复习要点：** 先检查列表为空，再访问首元素；检查顺序具有实际作用。这里的 `raise` 不是打印提示后继续执行。
