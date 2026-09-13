@@ -61,6 +61,8 @@ python -m pip install --no-deps -e .
 
 ## 4. 密钥与在线实验
 
+预算为零时，先看 [免费路线](zero-budget.md)，不要求购买 OpenAI API。本轮新增 Agnes dry-run 和真实本地 PostgreSQL 验证；后者另装 `requirements-database.txt`，不强制塞入基础课程依赖。
+
 - 不在 Git、截图、聊天或命令历史里写入实际密钥。
 - `.env` 已忽略，但脚本**不自动读取 `.env`**。使用 IDE 的安全环境配置、系统凭据工具，或终端隐藏输入后设置进程环境。
 - Bash 可用 `read -rs OPENAI_API_KEY; export OPENAI_API_KEY` 临时输入；不要把密钥打印出来。结束后 `unset OPENAI_API_KEY`。

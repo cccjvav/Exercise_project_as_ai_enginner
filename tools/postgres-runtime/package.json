@@ -1,0 +1,1 @@
+{"name":"evidencedesk-postgres-lab-runtime","private":true,"version":"0.1.0","description":"Pinned third-party PostgreSQL binaries for the Linux x64 sandbox lab only","dependencies":{"@embedded-postgres/linux-x64":"18.4.0-beta.17"}}

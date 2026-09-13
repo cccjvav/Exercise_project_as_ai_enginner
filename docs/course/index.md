@@ -4,8 +4,9 @@
 
 每课遵循：**问题 → 原理 → 完整示例与逐行讲解 → 按步骤做关键改动 → 验证 → 反思**。示例先给出，不要求对着空文件摸索；重点是看懂数据流、预测一个变化，再实际验证。
 
-## 先读这三份说明
+## 先读这些说明
 
+- [零预算实操方案](zero-budget.md)：免费模型、已运行的真实 PostgreSQL、公开资料、云部署包。
 - [环境与依赖分层](setup.md)：不要一次装全套模型框架。
 - [测试与未验证事项](verification.md)：严格区分离线通过、在线待验、生产未完成。
 - [组件如何组合成最终作品](integration.md)：教材/组件示例齐备不等于完整产品已经集成。
@@ -27,7 +28,7 @@
 | 4B | [重排序、多查询、父子检索与消融](../lessons/04b-rerank-multiquery.md) | 管道连接机制已提供；重排分数与改写排名是明确 fixture，尚未验证真实质量。 |
 | 5A | [FastAPI、授权边界与 SSE](../lessons/05a-api-security.md) | 真实 API/TestClient 已测；公开固定令牌仅用于虚构资料。 |
 | 5B | [TypeScript 前端、取消与安全展示](../lessons/05b-typescript-ui.md) | TypeScript 编译已测；尚未做真实浏览器端到端自动化。 |
-| 5C | [PostgreSQL、RLS 与缓存隔离](../lessons/05c-postgres-cache.md) | 缓存键示例已运行；SQL 为完整实验 schema，但未连接 PostgreSQL 验证。 |
+| 5C | [PostgreSQL、RLS 与缓存隔离](../lessons/05c-postgres-cache.md) | PostgreSQL 18.4 的 documents RLS 已实测；托管云数据库尚未创建。 |
 | 6A | [LangGraph 的暂停、恢复与审批](../lessons/06a-langgraph.md) | 真实 LangGraph 无模型流程已测；checkpoint 只在内存。 |
 | 6B | [工具调用、参数校验与幂等](../lessons/06b-authorized-tools.md) | SQLite 模拟工单与重启幂等测试已通过；不连接真实工单系统。 |
 | 7A | [回归评测、Ragas 与 LangSmith](../lessons/07a-eval-observability.md) | 离线遥测已运行；Ragas/托管 LangSmith 参考示例未发起在线调用。 |

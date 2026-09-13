@@ -1,0 +1,12 @@
+{
+  "repository": "fastapi/fastapi",
+  "revision": "50113da16fec53b66b80d75e80a89296de4fa5a5",
+  "license": "MIT",
+  "license_path": "LICENSE",
+  "purpose": "公开的开发者支持资料；独立于虚构 Northstar Cloud 手册，不混用两套评测标签。",
+  "documents": [
+    {"id": "fastapi-deployment-concepts", "title": "FastAPI Deployment Concepts", "path": "docs/en/docs/deployment/concepts.md"},
+    {"id": "fastapi-https", "title": "FastAPI About HTTPS", "path": "docs/en/docs/deployment/https.md"},
+    {"id": "fastapi-security-first-steps", "title": "FastAPI Security First Steps", "path": "docs/en/docs/tutorial/security/first-steps.md"}
+  ]
+}

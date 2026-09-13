@@ -1,0 +1,3 @@
+# Optional local PostgreSQL lab client; runtime binaries are pinned via npm separately.
+psycopg==3.3.5
+psycopg-binary==3.3.5

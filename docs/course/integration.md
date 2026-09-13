@@ -2,6 +2,8 @@
 
 ## 当前事实
 
+本轮已另行验证本地 PostgreSQL 的 documents RLS 和数据重启读取，并准备 Agnes 单次接入与无密钥云展示包；详情见 [零预算记录](zero-budget.md)。当前 Web API 仍读文件，尚未接入 PostgreSQL 或真实模型。
+
 全套教材已提前准备。仓库提供一条已运行的**词法证据检索 Web 演示**，以及独立的入库、向量、在线 RAG、审批、记忆、MCP 等参考实验。不是所有实验都已经接到同一个服务里，也不是已完成生产应用。
 
 离线演示链：`Markdown → Document → 词法检索 → FastAPI → TypeScript 页面`。

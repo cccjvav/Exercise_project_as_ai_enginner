@@ -6,6 +6,7 @@
 
 ## 现在从哪里开始？
 
+- **[零预算方案与本轮实际执行结果](docs/course/zero-budget.md)** — Agnes 免费型号、真实 PostgreSQL、公开资料和逐步云部署。
 - **[全部课程目录](docs/course/index.md)** — 22 节完整小课、顺序和阶段验收要求。
 - **[当前学习：1A 读取一份文档](docs/lessons/01a-read-document.md)** — 先理解这一个小示例。
 - [环境准备与依赖分层](docs/course/setup.md) — 不要一次安装全部框架。
