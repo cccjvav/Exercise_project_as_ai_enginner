@@ -18,7 +18,7 @@
 
 - [1C：检索、证据边界、排序与 top-k（含验收小结）](../lessons/01c-lexical-search.md#已完成问答与标准答案)。
 
-- [1D：pytest、参数化与 CLI 类型纠错](../lessons/01d-cli-tests.md#已完成问答与标准答案)。
+- [1D：pytest、CLI 输出约定与类型纠错](../lessons/01d-cli-tests.md#已完成问答与标准答案)。
 
 正确作答后更新对应文档；未完成题不提前归档答案。
 
