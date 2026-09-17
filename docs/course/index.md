@@ -20,7 +20,7 @@
 
 - [1D：pytest、CLI 输出约定与类型纠错（含验收小结）](../lessons/01d-cli-tests.md#已完成问答与标准答案)。
 
-- [1E：Recall、MRR 与无答案题纠错](../lessons/01e-evaluation.md#已完成问答与标准答案)。
+- [1E：检索指标、无答案题纠错与八题基线](../lessons/01e-evaluation.md#已完成问答与标准答案)。
 
 正确作答后更新对应文档；未完成题不提前归档答案。
 
