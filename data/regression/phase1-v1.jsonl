@@ -1,0 +1,9 @@
+{"id":"q01","question":"Webhook 重试多少次？","answerable":true,"relevant_document_ids":["webhook-delivery"],"reference_facts":["最多重试 3 次，不包含首次投递"],"category":"exact_terms"}
+{"id":"q02","question":"webhook 重试的等待间隔是什么？","answerable":true,"relevant_document_ids":["webhook-delivery"],"reference_facts":["依次为 1、5、30 分钟，从前一次失败计算"],"category":"exact_terms"}
+{"id":"q03","question":"密钥应该多久轮换？","answerable":true,"relevant_document_ids":["api-key-policy"],"reference_facts":["计划内每 90 天轮换；怀疑泄露应立即撤销"],"category":"exact_terms"}
+{"id":"q04","question":"签名校验允许多少时间偏差？","answerable":true,"relevant_document_ids":["api-key-policy"],"reference_facts":["允许时间偏差 5 分钟"],"category":"exact_terms"}
+{"id":"q05","question":"P1 工单无人确认多久需要升级？","answerable":true,"relevant_document_ids":["incident-escalation"],"reference_facts":["10 分钟无人确认时升级给值班负责人"],"category":"exact_terms"}
+{"id":"q06","question":"消息没送到还会再发吗？","answerable":true,"relevant_document_ids":["webhook-delivery"],"reference_facts":["连接失败或返回非 2xx 时最多再尝试 3 次"],"category":"paraphrase"}
+{"id":"q07","question":"年付折扣是多少？","answerable":false,"relevant_document_ids":[],"reference_facts":[],"category":"unanswerable"}
+{"id":"q08","question":"办公楼的访客停车位在哪里？","answerable":false,"relevant_document_ids":[],"reference_facts":[],"category":"unanswerable"}
+{"id":"q09","question":"Webhook 重试收费多少？","answerable":false,"relevant_document_ids":[],"reference_facts":[],"category":"unanswerable_with_terms"}

@@ -2,10 +2,46 @@
 
 [全部课程](../course/index.md) · [上一课](01e-evaluation.md) · [下一课](02b-pdf-tokens.md)
 
+- **学习进度：** 进行中；学习者于 2026-09-17 确认进入阶段 2。先理解不重叠字符分块，尚无本课问答或实操验收。
 - **前置理解：** 阶段 1；理解文件身份与评测
 - **验证状态：** 字符分块与内存快照已测试；不是生产持久化索引。
 - **节奏：** 建议拆成“读例子/讲解”和“关键实操/复盘”两次，每次 20–45 分钟；遇到不懂的一行就停下问。
 - **学习规则：** 教材已提前备齐不代表你已通过；无需先独立写实现。跨阶段前仍需你确认。
+
+## 当前起步：把长文切成可定位的小段（待完成）
+
+阶段 1 的 q06、q09 没有因为过关而消失，已列入[跨阶段回归跟踪](../course/regression-cases.md)。本课先解决长文组织、来源和更新，不宣称分块就能理解同义词或判断收费依据；当前 chunks 也尚未自动接入 search。
+
+先只看不重叠分块，不同时展开哈希、版本与更新逻辑。下面直接调用已有函数，无需安装新依赖：
+
+```python
+from evidencedesk.documents import Document
+from evidencedesk.ingest import chunks
+
+
+doc = Document(
+    id="demo", title="分块示例", text="ABCDEFGHIJ", source="demo.md"
+)
+for chunk in chunks(doc, size=4, overlap=0):
+    print(chunk["start"], chunk["end"], chunk["text"])
+```
+
+输出：
+
+```text
+0 4 ABCD
+4 8 EFGH
+8 10 IJ
+```
+
+- 这是手工构造的 Document，不需要创建或读取 demo.md 文件；source 只是本例的示意字段。
+- `size=4` 表示每块最多 4 个 Python 字符，不是 4 字节或 4 tokens。
+- `overlap=0` 表示相邻块暂不重叠，重叠的作用下一步再讲。
+- 函数返回字典列表，循环每次取出一个块。
+- start/end 为半开区间：包括 start，不包括 end。text[4:8] 对应 EFGH；最后不足 4 个字符也保留。
+- 此处只打印定位与正文；实际函数还保留父文档、来源和版本信息，后面逐步展开。
+
+概念检查（待回答）：同样的字符串改为 size=3、overlap=0，会得到几块？每块内容是什么？先预测即可，不将未回答题提前归档为已掌握。
 
 ## 1. 问题：现在为什么需要它？
 
