@@ -22,7 +22,7 @@
 
 - [1E：检索指标、纠错与八题/九题评测](../lessons/01e-evaluation.md#已完成问答与标准答案)。
 
-- [2A：字符分块、重叠与步长](../lessons/02a-chunks-versions.md#已完成问答与标准答案)。
+- [2A：字符分块、重叠与重复量实操](../lessons/02a-chunks-versions.md#已完成问答与标准答案)。
 
 正确作答后更新对应文档；未完成题不提前归档答案。
 
