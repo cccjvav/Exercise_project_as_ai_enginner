@@ -11,6 +11,7 @@
 - **[当前学习：2A 分块、来源与幂等更新](docs/lessons/02a-chunks-versions.md)** — 阶段 1 基础验收通过，已确认进入阶段 2。
 - [已知问题与跨阶段回归跟踪](docs/course/regression-cases.md) — q06/q09 持续复测，目前仍未解决。
 - [环境准备与依赖分层](docs/course/setup.md) — 不要一次安装全部框架。
+- [代码讲解覆盖清单](docs/course/code-explanation-coverage.md) — 课程齐备不等于全仓库每行均已精讲，缺口单独列明。
 - [实际验证结果与未验证事项](docs/course/verification.md) — 不把未运行内容称为成功。
 - [整体项目路线与技术取舍](docs/roadmap.md)。
 
