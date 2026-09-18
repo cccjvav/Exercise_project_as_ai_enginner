@@ -1,5 +1,7 @@
 # 5A · FastAPI、授权边界与 SSE
 
+> **1A细度源码精讲（2026-09-19补充）：** [src/evidencedesk/api.py](../code/src--evidencedesk--api_py.md) · [tests/test_api.py](../code/tests--test_api_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
+
 [全部课程](../course/index.md) · [上一课](04b-rerank-multiquery.md) · [下一课](05b-typescript-ui.md)
 
 - **前置理解：** 阶段 4；先理解离线结果，再服务化

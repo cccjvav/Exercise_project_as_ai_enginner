@@ -1,5 +1,7 @@
 # 1C · 词覆盖检索与稳定排序
 
+> **1A细度源码精讲（2026-09-19补充）：** [src/evidencedesk/search.py](../code/src--evidencedesk--search_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
+
 [全部课程](../course/index.md) · [上一课](01b-structured-loading.md) · [下一课](01d-cli-tests.md)
 
 - **学习进度：** 已完成。本课基础目标依据概念回答及检索实操反馈验收，详见文末；不代表阶段 1 整体通过。

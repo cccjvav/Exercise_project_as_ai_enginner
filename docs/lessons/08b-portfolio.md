@@ -1,5 +1,7 @@
 # 8B · 对照报告、演示与求职表达
 
+> **1A细度源码精讲（2026-09-19补充）：** [examples/portfolio_snapshot.py](../code/examples--portfolio_snapshot_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
+
 [全部课程](../course/index.md) · [上一课](08a-deploy-ci.md) · [下一课](09a-deepagents.md)
 
 - **前置理解：** 8A；所有拟声明的结果都有实测来源

@@ -11,7 +11,8 @@
 - **[当前学习：2A 分块、来源与幂等更新](docs/lessons/02a-chunks-versions.md)** — 阶段 1 基础验收通过，已确认进入阶段 2。
 - [已知问题与跨阶段回归跟踪](docs/course/regression-cases.md) — q06/q09 持续复测，目前仍未解决。
 - [环境准备与依赖分层](docs/course/setup.md) — 不要一次安装全部框架。
-- [代码讲解覆盖清单](docs/course/code-explanation-coverage.md) — 课程齐备不等于全仓库每行均已精讲，缺口单独列明。
+- **[项目源码逐行精讲](docs/code/index.md)** — 51份主清单按1A细度展开；另10份配置/锁文件说明用途与维护。
+- [代码讲解覆盖清单](docs/course/code-explanation-coverage.md) — 明确源码范围、行号核对与教学质量边界；不等于学习进度已推进。
 - [实际验证结果与未验证事项](docs/course/verification.md) — 不把未运行内容称为成功。
 - [整体项目路线与技术取舍](docs/roadmap.md)。
 
@@ -62,6 +63,7 @@ python -m pytest -q
 ```text
 docs/course/         课程总入口、环境、集成与验证说明
 docs/lessons/        22 节小课 + 阶段 1 总览
+docs/code/           项目源码逐行精讲、覆盖清单与维护说明
 docs/experiments/    消融实验和作品集模板
 docs/reviews/        阶段验收记录模板
 src/evidencedesk/    可复用课程组件

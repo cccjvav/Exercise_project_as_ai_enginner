@@ -1,5 +1,7 @@
 # 2B · PDF、文本层与 token
 
+> **1A细度源码精讲（2026-09-19补充）：** [examples/make_demo_pdf.py](../code/examples--make_demo_pdf_py.md) · [examples/pdf_tokens.py](../code/examples--pdf_tokens_py.md) · [tests/test_integrations.py](../code/tests--test_integrations_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
+
 [全部课程](../course/index.md) · [上一课](02a-chunks-versions.md) · [下一课](03a-vector-geometry.md)
 
 - **前置理解：** 2A；安装 ingest extra

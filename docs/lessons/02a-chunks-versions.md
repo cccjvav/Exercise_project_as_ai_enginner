@@ -1,5 +1,7 @@
 # 2A · 分块、来源与幂等更新
 
+> **1A细度源码精讲（2026-09-19补充）：** [examples/chunk_versions.py](../code/examples--chunk_versions_py.md) · [src/evidencedesk/ingest.py](../code/src--evidencedesk--ingest_py.md) · [tests/test_core.py](../code/tests--test_core_py.md) · [tools/fetch_public_manuals.py](../code/tools--fetch_public_manuals_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
+
 [全部课程](../course/index.md) · [上一课](01e-evaluation.md) · [下一课](02b-pdf-tokens.md)
 
 - **学习进度：** 进行中；学习者于 2026-09-17 确认进入阶段 2。不重叠分块、重叠窗口与步长预测均已答对；重叠重复量实验已反馈通过，取舍解释方向正确并获术语补充；父文档归属题已作答，导师补充了 parent_id 与块 id 的区别；来源定位实操、版本与更新尚未验收。

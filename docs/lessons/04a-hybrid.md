@@ -1,5 +1,7 @@
 # 4A · BM25 与混合检索
 
+> **1A细度源码精讲（2026-09-19补充）：** [examples/hybrid_rankings.py](../code/examples--hybrid_rankings_py.md) · [src/evidencedesk/hybrid.py](../code/src--evidencedesk--hybrid_py.md) · [tests/test_core.py](../code/tests--test_core_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
+
 [全部课程](../course/index.md) · [上一课](03b-live-rag.md) · [下一课](04b-rerank-multiquery.md)
 
 - **前置理解：** 阶段 3；理解词法与向量各自的失败

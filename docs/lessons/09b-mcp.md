@@ -1,5 +1,7 @@
 # 9B · MCP 工具协议与只读集成
 
+> **1A细度源码精讲（2026-09-19补充）：** [examples/mcp_client.py](../code/examples--mcp_client_py.md) · [examples/mcp_server.py](../code/examples--mcp_server_py.md) · [tests/test_integrations.py](../code/tests--test_integrations_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
+
 [全部课程](../course/index.md) · [上一课](09a-deepagents.md) · [下一课](../course/index.md)
 
 - **前置理解：** 9A 可只读不执行；已理解普通 Python 工具调用

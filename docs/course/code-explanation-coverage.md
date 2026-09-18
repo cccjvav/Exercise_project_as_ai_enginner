@@ -1,106 +1,91 @@
 # 项目代码讲解覆盖清单
 
-[课程目录](index.md) · [当前 2A](../lessons/02a-chunks-versions.md)
+[课程目录](index.md) · [源码逐行总目录](../code/index.md) · [当前2A](../lessons/02a-chunks-versions.md)
 
-核查日期：2026-09-18。基准：`8a7c4be` 的受 Git 管理文件；本轮只增加文档，不改变下列实现文件。
+核查日期：2026-09-19。上一轮审计发现“22课齐备”不等于“所有源文件1A细度”；本轮按用户授权对**全部主清单**补写/展开，而非只补原13个实质缺口。
 
-## 结论：没有完成全仓库逐行精讲
+## 本轮交付范围
 
-22 节课程已准备，不等于项目内每份文件、每行代码都已精讲。主线教材有完整源码、就近注释及“逐行/相邻语句”说明，但很多说明以若干行组成的语句组呈现，不能一概称为达到 1A 的逐行讲解细度。
+- **51份主清单文件，1779个物理行**：完整源码、每行定位与解释、输入输出、风险、数据演算、一个关键练习及复盘。原35份已有源码/分组说明也补成逐行页；1A原讲解保留；两个仅说明字符串的包入口单列解释。
+- **10份补充配置/维护文件**：忽略规则和小配置逐项讲，依赖锁讲结构/固定版本/更新流程，不冒称逐条解释第三方库实现。
+- 新增材料在docs/code；22课只增加阅读入口，保留原来的任务与1A–2A作答档案。**学习仍是2A/Q1–Q4已归档、未验收**。
+- 第三方安装目录、生成物、原始/处理数据正文、机器本地未提交scratch/test与用户笔记不计入源码范围。新业务文件加入时应更新此清单，不能拿51作为永久分母。
 
-三个维度必须分开：教材已写好、讲解是否逐句充分、学习者是否已经学过并验收。当前教学仅到 2A；未来课程有文档不等于对话里已经讲过，阶段基础验收也不是逐文件逐行掌握证明。
+物理行数包含空行/注释；较上轮1766增加13行，来自`tools/check_course.py`增加hash/行号清单校验。应用、例子、测试、前端、SQL和部署业务行为本轮未更改。
 
-## 核查口径与数量
+## 质量与验证不是同一件事
 
-- 本表列 51 个受 Git 管理的实现/示例/测试/工具/前端文件，以及 Dockerfile、主线 pyproject 和 CI 配置。包含两个仅有模块说明字符串的包入口。
-- 35 个文件在课程中有 `<!-- source: ... -->` 标记的完整源码副本；这些副本已核对与当前源文件一致，**不是 35 份均已完成人工逐行精讲的证明**。
-- `examples/01_read_document.py` 没有该标记，但 1A 确实有完整示例和按具体行解释；不能因缺少标记就算成没有讲解。
-- 两个 `__init__.py` 仅含模块说明，没有业务执行逻辑，单独列示。
-- 另有 13 个有实质内容的文件，尚未纳入上述完整文件级讲解；其中部分已有用途、运行步骤或行内注释，不等于完全没有文档，也不等于逐行精讲已完成。
-- 其他 JSON/TOML 配置、锁文件、依赖列表与忽略规则另列，不将它们假装纳入“51 个代码文件都覆盖”的统计。原始数据、第三方依赖、构建产物和学员本机未提交的 scratch/test 文件不在本次清单内。
-
-`tools/check_course.py` 检查源码副本一致性、本地链接、课数及部分目录的 Python 语法；它不会判断每行是否解释充分，更不能判断学习者是否掌握。因此其 PASS 不能用作全仓库讲解覆盖率。
+每份逐行页都解释具体语句的语法、数据流、理由与边界。检查器可核对源码副本、hash、行数与逐行锚点，**不能自动评判讲解充分、内容事实正确或学习者掌握**；这些仍需人工校读和分阶段练习。具体实测与未运行项见[验证记录](../code/validation.md)。
 
 ## 逐文件入口
 
-表中“主线源码＋语句组讲解”表示已有材料入口，**不是严格逐行精讲已验收**。行数为空行、注释在内的物理行数，仅帮助估计阅读范围。
+| 文件 | 行数 | 本轮材料 |
+|---|---:|---|
+| [.github/workflows/course.yml](../../.github/workflows/course.yml) | 25 | [完整源码＋逐行精讲＋关键练习](../code/_github--workflows--course_yml.md) |
+| [deploy/Dockerfile](../../deploy/Dockerfile) | 22 | [完整源码＋逐行精讲＋关键练习](../code/deploy--Dockerfile.md) |
+| [deploy/schema.sql](../../deploy/schema.sql) | 24 | [完整源码＋逐行精讲＋关键练习](../code/deploy--schema_sql.md) |
+| [examples/01_read_document.py](../../examples/01_read_document.py) | 17 | [完整源码＋逐行精讲＋关键练习](../code/examples--01_read_document_py.md) |
+| [examples/__init__.py](../../examples/__init__.py) | 1 | [完整源码＋逐行精讲＋关键练习](../code/examples--__init___py.md) |
+| [examples/agnes_rag.py](../../examples/agnes_rag.py) | 21 | [完整源码＋逐行精讲＋关键练习](../code/examples--agnes_rag_py.md) |
+| [examples/approval_graph.py](../../examples/approval_graph.py) | 43 | [完整源码＋逐行精讲＋关键练习](../code/examples--approval_graph_py.md) |
+| [examples/approved_ticket.py](../../examples/approved_ticket.py) | 22 | [完整源码＋逐行精讲＋关键练习](../code/examples--approved_ticket_py.md) |
+| [examples/cache_scope.py](../../examples/cache_scope.py) | 19 | [完整源码＋逐行精讲＋关键练习](../code/examples--cache_scope_py.md) |
+| [examples/chunk_versions.py](../../examples/chunk_versions.py) | 19 | [完整源码＋逐行精讲＋关键练习](../code/examples--chunk_versions_py.md) |
+| [examples/deep_research.py](../../examples/deep_research.py) | 29 | [完整源码＋逐行精讲＋关键练习](../code/examples--deep_research_py.md) |
+| [examples/hybrid_rankings.py](../../examples/hybrid_rankings.py) | 13 | [完整源码＋逐行精讲＋关键练习](../code/examples--hybrid_rankings_py.md) |
+| [examples/judge_answer.py](../../examples/judge_answer.py) | 24 | [完整源码＋逐行精讲＋关键练习](../code/examples--judge_answer_py.md) |
+| [examples/langsmith_metrics.py](../../examples/langsmith_metrics.py) | 18 | [完整源码＋逐行精讲＋关键练习](../code/examples--langsmith_metrics_py.md) |
+| [examples/live_rag.py](../../examples/live_rag.py) | 52 | [完整源码＋逐行精讲＋关键练习](../code/examples--live_rag_py.md) |
+| [examples/live_variants.py](../../examples/live_variants.py) | 40 | [完整源码＋逐行精讲＋关键练习](../code/examples--live_variants_py.md) |
+| [examples/load_manuals.py](../../examples/load_manuals.py) | 11 | [完整源码＋逐行精讲＋关键练习](../code/examples--load_manuals_py.md) |
+| [examples/make_demo_pdf.py](../../examples/make_demo_pdf.py) | 22 | [完整源码＋逐行精讲＋关键练习](../code/examples--make_demo_pdf_py.md) |
+| [examples/mcp_client.py](../../examples/mcp_client.py) | 25 | [完整源码＋逐行精讲＋关键练习](../code/examples--mcp_client_py.md) |
+| [examples/mcp_server.py](../../examples/mcp_server.py) | 20 | [完整源码＋逐行精讲＋关键练习](../code/examples--mcp_server_py.md) |
+| [examples/memory_lifecycle.py](../../examples/memory_lifecycle.py) | 17 | [完整源码＋逐行精讲＋关键练习](../code/examples--memory_lifecycle_py.md) |
+| [examples/pdf_tokens.py](../../examples/pdf_tokens.py) | 25 | [完整源码＋逐行精讲＋关键练习](../code/examples--pdf_tokens_py.md) |
+| [examples/portfolio_snapshot.py](../../examples/portfolio_snapshot.py) | 25 | [完整源码＋逐行精讲＋关键练习](../code/examples--portfolio_snapshot_py.md) |
+| [examples/retrieval_variants.py](../../examples/retrieval_variants.py) | 16 | [完整源码＋逐行精讲＋关键练习](../code/examples--retrieval_variants_py.md) |
+| [examples/trace_allowlist.py](../../examples/trace_allowlist.py) | 19 | [完整源码＋逐行精讲＋关键练习](../code/examples--trace_allowlist_py.md) |
+| [examples/vector_geometry.py](../../examples/vector_geometry.py) | 21 | [完整源码＋逐行精讲＋关键练习](../code/examples--vector_geometry_py.md) |
+| [frontend/client.ts](../../frontend/client.ts) | 42 | [完整源码＋逐行精讲＋关键练习](../code/frontend--client_ts.md) |
+| [frontend/index.html](../../frontend/index.html) | 11 | [完整源码＋逐行精讲＋关键练习](../code/frontend--index_html.md) |
+| [pyproject.toml](../../pyproject.toml) | 30 | [完整源码＋逐行精讲＋关键练习](../code/pyproject_toml.md) |
+| [src/evidencedesk/__init__.py](../../src/evidencedesk/__init__.py) | 1 | [完整源码＋逐行精讲＋关键练习](../code/src--evidencedesk--__init___py.md) |
+| [src/evidencedesk/agnes.py](../../src/evidencedesk/agnes.py) | 78 | [完整源码＋逐行精讲＋关键练习](../code/src--evidencedesk--agnes_py.md) |
+| [src/evidencedesk/api.py](../../src/evidencedesk/api.py) | 56 | [完整源码＋逐行精讲＋关键练习](../code/src--evidencedesk--api_py.md) |
+| [src/evidencedesk/documents.py](../../src/evidencedesk/documents.py) | 35 | [完整源码＋逐行精讲＋关键练习](../code/src--evidencedesk--documents_py.md) |
+| [src/evidencedesk/evaluate.py](../../src/evidencedesk/evaluate.py) | 50 | [完整源码＋逐行精讲＋关键练习](../code/src--evidencedesk--evaluate_py.md) |
+| [src/evidencedesk/hybrid.py](../../src/evidencedesk/hybrid.py) | 43 | [完整源码＋逐行精讲＋关键练习](../code/src--evidencedesk--hybrid_py.md) |
+| [src/evidencedesk/ingest.py](../../src/evidencedesk/ingest.py) | 27 | [完整源码＋逐行精讲＋关键练习](../code/src--evidencedesk--ingest_py.md) |
+| [src/evidencedesk/memory.py](../../src/evidencedesk/memory.py) | 30 | [完整源码＋逐行精讲＋关键练习](../code/src--evidencedesk--memory_py.md) |
+| [src/evidencedesk/search.py](../../src/evidencedesk/search.py) | 55 | [完整源码＋逐行精讲＋关键练习](../code/src--evidencedesk--search_py.md) |
+| [src/evidencedesk/tickets.py](../../src/evidencedesk/tickets.py) | 37 | [完整源码＋逐行精讲＋关键练习](../code/src--evidencedesk--tickets_py.md) |
+| [tests/test_agnes.py](../../tests/test_agnes.py) | 70 | [完整源码＋逐行精讲＋关键练习](../code/tests--test_agnes_py.md) |
+| [tests/test_api.py](../../tests/test_api.py) | 83 | [完整源码＋逐行精讲＋关键练习](../code/tests--test_api_py.md) |
+| [tests/test_core.py](../../tests/test_core.py) | 97 | [完整源码＋逐行精讲＋关键练习](../code/tests--test_core_py.md) |
+| [tests/test_integrations.py](../../tests/test_integrations.py) | 49 | [完整源码＋逐行精讲＋关键练习](../code/tests--test_integrations_py.md) |
+| [tests/test_search.py](../../tests/test_search.py) | 57 | [完整源码＋逐行精讲＋关键练习](../code/tests--test_search_py.md) |
+| [tests/test_space_export.py](../../tests/test_space_export.py) | 12 | [完整源码＋逐行精讲＋关键练习](../code/tests--test_space_export_py.md) |
+| [tools/check_course.py](../../tools/check_course.py) | 42 | [完整源码＋逐行精讲＋关键练习](../code/tools--check_course_py.md) |
+| [tools/export_space.py](../../tools/export_space.py) | 33 | [完整源码＋逐行精讲＋关键练习](../code/tools--export_space_py.md) |
+| [tools/fetch_public_manuals.py](../../tools/fetch_public_manuals.py) | 53 | [完整源码＋逐行精讲＋关键练习](../code/tools--fetch_public_manuals_py.md) |
+| [tools/local_postgres.py](../../tools/local_postgres.py) | 57 | [完整源码＋逐行精讲＋关键练习](../code/tools--local_postgres_py.md) |
+| [tools/postgres_lab.py](../../tools/postgres_lab.py) | 100 | [完整源码＋逐行精讲＋关键练习](../code/tools--postgres_lab_py.md) |
+| [tools/sync_course_sources.py](../../tools/sync_course_sources.py) | 41 | [完整源码＋逐行精讲＋关键练习](../code/tools--sync_course_sources_py.md) |
 
-| 文件 | 行数 | 当前讲解状态 | 教材入口 |
-|---|---:|---|---|
-| [.github/workflows/course.yml](../../.github/workflows/course.yml) | 25 | 主线源码＋语句组讲解；细度未逐行审定 | [08a-deploy-ci](../lessons/08a-deploy-ci.md) |
-| [deploy/Dockerfile](../../deploy/Dockerfile) | 22 | 主线源码＋语句组讲解；细度未逐行审定 | [08a-deploy-ci](../lessons/08a-deploy-ci.md) |
-| [deploy/schema.sql](../../deploy/schema.sql) | 24 | 主线源码＋语句组讲解；细度未逐行审定 | [05c-postgres-cache](../lessons/05c-postgres-cache.md) |
-| [examples/01_read_document.py](../../examples/01_read_document.py) | 17 | 有按具体行的手工讲解 | [1A](../lessons/01a-read-document.md) |
-| [examples/__init__.py](../../examples/__init__.py) | 1 | 仅模块说明；无业务执行语句 | 包入口，不计作缺失的复杂逻辑讲解 |
-| [examples/agnes_rag.py](../../examples/agnes_rag.py) | 21 | 待补完整文件级讲解 | 现有用途说明/行内注释不能替代逐行精讲 |
-| [examples/approval_graph.py](../../examples/approval_graph.py) | 43 | 主线源码＋语句组讲解；细度未逐行审定 | [06a-langgraph](../lessons/06a-langgraph.md) |
-| [examples/approved_ticket.py](../../examples/approved_ticket.py) | 22 | 主线源码＋语句组讲解；细度未逐行审定 | [06b-authorized-tools](../lessons/06b-authorized-tools.md) |
-| [examples/cache_scope.py](../../examples/cache_scope.py) | 19 | 主线源码＋语句组讲解；细度未逐行审定 | [05c-postgres-cache](../lessons/05c-postgres-cache.md) |
-| [examples/chunk_versions.py](../../examples/chunk_versions.py) | 19 | 主线源码＋语句组讲解；细度未逐行审定 | [02a-chunks-versions](../lessons/02a-chunks-versions.md) |
-| [examples/deep_research.py](../../examples/deep_research.py) | 29 | 主线源码＋语句组讲解；细度未逐行审定 | [09a-deepagents](../lessons/09a-deepagents.md) |
-| [examples/hybrid_rankings.py](../../examples/hybrid_rankings.py) | 13 | 主线源码＋语句组讲解；细度未逐行审定 | [04a-hybrid](../lessons/04a-hybrid.md) |
-| [examples/judge_answer.py](../../examples/judge_answer.py) | 24 | 主线源码＋语句组讲解；细度未逐行审定 | [07a-eval-observability](../lessons/07a-eval-observability.md) |
-| [examples/langsmith_metrics.py](../../examples/langsmith_metrics.py) | 18 | 主线源码＋语句组讲解；细度未逐行审定 | [07a-eval-observability](../lessons/07a-eval-observability.md) |
-| [examples/live_rag.py](../../examples/live_rag.py) | 52 | 主线源码＋语句组讲解；细度未逐行审定 | [03b-live-rag](../lessons/03b-live-rag.md) |
-| [examples/live_variants.py](../../examples/live_variants.py) | 40 | 主线源码＋语句组讲解；细度未逐行审定 | [04b-rerank-multiquery](../lessons/04b-rerank-multiquery.md) |
-| [examples/load_manuals.py](../../examples/load_manuals.py) | 11 | 主线源码＋语句组讲解；细度未逐行审定 | [01b-structured-loading](../lessons/01b-structured-loading.md) |
-| [examples/make_demo_pdf.py](../../examples/make_demo_pdf.py) | 22 | 主线源码＋语句组讲解；细度未逐行审定 | [02b-pdf-tokens](../lessons/02b-pdf-tokens.md) |
-| [examples/mcp_client.py](../../examples/mcp_client.py) | 25 | 主线源码＋语句组讲解；细度未逐行审定 | [09b-mcp](../lessons/09b-mcp.md) |
-| [examples/mcp_server.py](../../examples/mcp_server.py) | 20 | 主线源码＋语句组讲解；细度未逐行审定 | [09b-mcp](../lessons/09b-mcp.md) |
-| [examples/memory_lifecycle.py](../../examples/memory_lifecycle.py) | 17 | 主线源码＋语句组讲解；细度未逐行审定 | [07b-memory](../lessons/07b-memory.md) |
-| [examples/pdf_tokens.py](../../examples/pdf_tokens.py) | 25 | 主线源码＋语句组讲解；细度未逐行审定 | [02b-pdf-tokens](../lessons/02b-pdf-tokens.md) |
-| [examples/portfolio_snapshot.py](../../examples/portfolio_snapshot.py) | 25 | 主线源码＋语句组讲解；细度未逐行审定 | [08b-portfolio](../lessons/08b-portfolio.md) |
-| [examples/retrieval_variants.py](../../examples/retrieval_variants.py) | 16 | 主线源码＋语句组讲解；细度未逐行审定 | [04b-rerank-multiquery](../lessons/04b-rerank-multiquery.md) |
-| [examples/trace_allowlist.py](../../examples/trace_allowlist.py) | 19 | 主线源码＋语句组讲解；细度未逐行审定 | [07a-eval-observability](../lessons/07a-eval-observability.md) |
-| [examples/vector_geometry.py](../../examples/vector_geometry.py) | 21 | 主线源码＋语句组讲解；细度未逐行审定 | [03a-vector-geometry](../lessons/03a-vector-geometry.md) |
-| [frontend/client.ts](../../frontend/client.ts) | 42 | 主线源码＋语句组讲解；细度未逐行审定 | [05b-typescript-ui](../lessons/05b-typescript-ui.md) |
-| [frontend/index.html](../../frontend/index.html) | 11 | 待补完整文件级讲解 | 现有用途说明/行内注释不能替代逐行精讲 |
-| [pyproject.toml](../../pyproject.toml) | 30 | 主线源码＋语句组讲解；细度未逐行审定 | [01d-cli-tests](../lessons/01d-cli-tests.md) |
-| [src/evidencedesk/__init__.py](../../src/evidencedesk/__init__.py) | 1 | 仅模块说明；无业务执行语句 | 包入口，不计作缺失的复杂逻辑讲解 |
-| [src/evidencedesk/agnes.py](../../src/evidencedesk/agnes.py) | 78 | 待补完整文件级讲解 | 现有用途说明/行内注释不能替代逐行精讲 |
-| [src/evidencedesk/api.py](../../src/evidencedesk/api.py) | 56 | 主线源码＋语句组讲解；细度未逐行审定 | [05a-api-security](../lessons/05a-api-security.md) |
-| [src/evidencedesk/documents.py](../../src/evidencedesk/documents.py) | 35 | 主线源码＋语句组讲解；细度未逐行审定 | [01b-structured-loading](../lessons/01b-structured-loading.md) |
-| [src/evidencedesk/evaluate.py](../../src/evidencedesk/evaluate.py) | 50 | 主线源码＋语句组讲解；细度未逐行审定 | [01e-evaluation](../lessons/01e-evaluation.md) |
-| [src/evidencedesk/hybrid.py](../../src/evidencedesk/hybrid.py) | 43 | 主线源码＋语句组讲解；细度未逐行审定 | [04a-hybrid](../lessons/04a-hybrid.md) |
-| [src/evidencedesk/ingest.py](../../src/evidencedesk/ingest.py) | 27 | 主线源码＋语句组讲解；细度未逐行审定 | [02a-chunks-versions](../lessons/02a-chunks-versions.md) |
-| [src/evidencedesk/memory.py](../../src/evidencedesk/memory.py) | 30 | 主线源码＋语句组讲解；细度未逐行审定 | [07b-memory](../lessons/07b-memory.md) |
-| [src/evidencedesk/search.py](../../src/evidencedesk/search.py) | 55 | 主线源码＋语句组讲解；细度未逐行审定 | [01c-lexical-search](../lessons/01c-lexical-search.md) |
-| [src/evidencedesk/tickets.py](../../src/evidencedesk/tickets.py) | 37 | 主线源码＋语句组讲解；细度未逐行审定 | [06b-authorized-tools](../lessons/06b-authorized-tools.md) |
-| [tests/test_agnes.py](../../tests/test_agnes.py) | 70 | 待补完整文件级讲解 | 现有用途说明/行内注释不能替代逐行精讲 |
-| [tests/test_api.py](../../tests/test_api.py) | 83 | 主线源码＋语句组讲解；细度未逐行审定 | [05a-api-security](../lessons/05a-api-security.md) |
-| [tests/test_core.py](../../tests/test_core.py) | 97 | 待补完整文件级讲解 | 现有用途说明/行内注释不能替代逐行精讲 |
-| [tests/test_integrations.py](../../tests/test_integrations.py) | 49 | 待补完整文件级讲解 | 现有用途说明/行内注释不能替代逐行精讲 |
-| [tests/test_search.py](../../tests/test_search.py) | 57 | 主线源码＋语句组讲解；细度未逐行审定 | [01d-cli-tests](../lessons/01d-cli-tests.md) |
-| [tests/test_space_export.py](../../tests/test_space_export.py) | 12 | 待补完整文件级讲解 | 现有用途说明/行内注释不能替代逐行精讲 |
-| [tools/check_course.py](../../tools/check_course.py) | 29 | 待补完整文件级讲解 | 现有用途说明/行内注释不能替代逐行精讲 |
-| [tools/export_space.py](../../tools/export_space.py) | 33 | 待补完整文件级讲解 | 现有用途说明/行内注释不能替代逐行精讲 |
-| [tools/fetch_public_manuals.py](../../tools/fetch_public_manuals.py) | 53 | 待补完整文件级讲解 | 现有用途说明/行内注释不能替代逐行精讲 |
-| [tools/local_postgres.py](../../tools/local_postgres.py) | 57 | 待补完整文件级讲解 | 现有用途说明/行内注释不能替代逐行精讲 |
-| [tools/postgres_lab.py](../../tools/postgres_lab.py) | 100 | 待补完整文件级讲解 | 现有用途说明/行内注释不能替代逐行精讲 |
-| [tools/sync_course_sources.py](../../tools/sync_course_sources.py) | 41 | 待补完整文件级讲解 | 现有用途说明/行内注释不能替代逐行精讲 |
+## 补充配置与维护（不混入51份逐行统计）
 
-## 其他配置与维护文件
+- [`.dockerignore`](../code/configuration-maintenance.md#config-1)
+- [`.gitignore`](../code/configuration-maintenance.md#config-2)
+- [`data/sources/fastapi.json`](../code/configuration-maintenance.md#config-3)
+- [`frontend/package.json`](../code/configuration-maintenance.md#config-4)
+- [`frontend/tsconfig.json`](../code/configuration-maintenance.md#config-5)
+- [`requirements-database.txt`](../code/configuration-maintenance.md#config-6)
+- [`requirements-tested.lock.txt`](../code/configuration-maintenance.md#config-7)
+- [`frontend/package-lock.json`](../code/configuration-maintenance.md#config-8)
+- [`tools/postgres-runtime/package.json`](../code/configuration-maintenance.md#config-9)
+- [`tools/postgres-runtime/package-lock.json`](../code/configuration-maintenance.md#config-10)
 
-下列文件在项目内，但不属于上表源文件口径；本轮没有逐项认定已经完整讲解。锁文件应重点解释用途、生成方式和更新风险，不把解释每个第三方依赖条目当成学习前提。
+## 进度与回归边界
 
-- [.dockerignore](../../.dockerignore)
-- [.gitignore](../../.gitignore)
-- [data/sources/fastapi.json](../../data/sources/fastapi.json)
-- [frontend/package-lock.json](../../frontend/package-lock.json)
-- [frontend/package.json](../../frontend/package.json)
-- [frontend/tsconfig.json](../../frontend/tsconfig.json)
-- [requirements-database.txt](../../requirements-database.txt)
-- [requirements-tested.lock.txt](../../requirements-tested.lock.txt)
-- [tools/postgres-runtime/package-lock.json](../../tools/postgres-runtime/package-lock.json)
-- [tools/postgres-runtime/package.json](../../tools/postgres-runtime/package.json)
-
-## 怎样补齐，而不跳过当前学习阶段
-
-这是一份缺口清单，不是本轮已完成补写的声明。若按“全项目逐行精讲”要求补齐，建议分为：
-
-1. 主线代码：将宽泛的多行概括展开到具体语句，解释语法、输入输出、数据变化、边界和设计理由。
-2. 配套测试：说明各 fixture/断言保护什么行为，以及什么错误会让它失败，而不是只介绍如何运行 pytest。
-3. 零预算与工程工具：补齐 Agnes、公开数据下载、PostgreSQL 实验、Space 导出及课程维护脚本的逐句阅读指南，明确安全/费用/环境边界。
-4. HTML 与配置：解释浏览器入口、脚本加载、编译与部署配置；锁文件和第三方内容按用途与维护方式说明。
-
-补写后的文件应明确标记具体覆盖范围，再复核源码一致性；不能仅因有一篇课程、一个注释或复制了源码就标为已精讲。提前补写材料不会自动推进学习者进度，当前仍是 2A。
+准备教材≠已运行所有实验≠学员已掌握。q06/q09仍按[固定九题跟踪](regression-cases.md)跨阶段复测；分块、fixture和框架安装都不是修复证据。未来阶段的模型、数据库/云资源与付费动作仍按课程单独确认。

@@ -1,5 +1,7 @@
 # 5B · TypeScript 前端、取消与安全展示
 
+> **1A细度源码精讲（2026-09-19补充）：** [frontend/client.ts](../code/frontend--client_ts.md) · [frontend/index.html](../code/frontend--index_html.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
+
 [全部课程](../course/index.md) · [上一课](05a-api-security.md) · [下一课](05c-postgres-cache.md)
 
 - **前置理解：** 5A；Node.js 22、已启用虚构演示服务

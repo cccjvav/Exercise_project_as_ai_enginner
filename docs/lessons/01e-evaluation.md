@@ -1,5 +1,7 @@
 # 1E · 第一次可复现检索评测
 
+> **1A细度源码精讲（2026-09-19补充）：** [src/evidencedesk/evaluate.py](../code/src--evidencedesk--evaluate_py.md) · [tests/test_core.py](../code/tests--test_core_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
+
 [全部课程](../course/index.md) · [上一课](01d-cli-tests.md) · [下一课](02a-chunks-versions.md)
 
 - **学习进度：** 基础目标已完成。指标问答、纠错、八题基线与九题反例均已收到反馈，阶段 1 基础验收通过；[验收记录](../reviews/phase-01-evidence-baseline.md)。学习者已确认进入阶段 2，当前学习 [2A](02a-chunks-versions.md)。

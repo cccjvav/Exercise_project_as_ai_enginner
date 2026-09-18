@@ -1,5 +1,7 @@
 # 1A：读取一份文档——先看完整实例，再逐行理解
 
+> **1A细度源码精讲（2026-09-19补充）：** [examples/01_read_document.py](../code/examples--01_read_document_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
+
 [全部课程](../course/index.md) · [下一课：可靠文档加载](01b-structured-loading.md)
 
 **学习进度：1A 已完成。** 根据学习者的运行反馈和概念题回答确认；已进入 1B。下方保留示例与标准答案供复习。

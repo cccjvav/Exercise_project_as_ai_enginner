@@ -1,5 +1,7 @@
 # 6B · 工具调用、参数校验与幂等
 
+> **1A细度源码精讲（2026-09-19补充）：** [examples/approved_ticket.py](../code/examples--approved_ticket_py.md) · [src/evidencedesk/tickets.py](../code/src--evidencedesk--tickets_py.md) · [tests/test_core.py](../code/tests--test_core_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
+
 [全部课程](../course/index.md) · [上一课](06a-langgraph.md) · [下一课](07a-eval-observability.md)
 
 - **前置理解：** 6A；理解审批不等于写权限

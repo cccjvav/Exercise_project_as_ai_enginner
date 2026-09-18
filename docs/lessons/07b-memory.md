@@ -1,5 +1,7 @@
 # 7B · 会话状态与可删除长期记忆
 
+> **1A细度源码精讲（2026-09-19补充）：** [examples/memory_lifecycle.py](../code/examples--memory_lifecycle_py.md) · [src/evidencedesk/memory.py](../code/src--evidencedesk--memory_py.md) · [tests/test_core.py](../code/tests--test_core_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
+
 [全部课程](../course/index.md) · [上一课](07a-eval-observability.md) · [下一课](08a-deploy-ci.md)
 
 - **前置理解：** 7A；理解隐私和数据生命周期

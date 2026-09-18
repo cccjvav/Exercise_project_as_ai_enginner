@@ -1,5 +1,7 @@
 # 1B · 从脚本到可靠文档加载器
 
+> **1A细度源码精讲（2026-09-19补充）：** [examples/load_manuals.py](../code/examples--load_manuals_py.md) · [src/evidencedesk/documents.py](../code/src--evidencedesk--documents_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
+
 [全部课程](../course/index.md) · [上一课](01a-read-document.md) · [下一课](01c-lexical-search.md)
 
 - **学习进度：** 已完成。本课基础目标依据聊天中的概念回答、纠错后的变式及运行反馈验收；不是整个阶段 1 已通过。详细记录见文末。

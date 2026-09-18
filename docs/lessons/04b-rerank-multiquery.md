@@ -1,5 +1,7 @@
 # 4B · 重排序、多查询、父子检索与消融
 
+> **1A细度源码精讲（2026-09-19补充）：** [examples/live_variants.py](../code/examples--live_variants_py.md) · [examples/retrieval_variants.py](../code/examples--retrieval_variants_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
+
 [全部课程](../course/index.md) · [上一课](04a-hybrid.md) · [下一课](05a-api-security.md)
 
 - **前置理解：** 4A；已有固定基线

@@ -1,5 +1,7 @@
 # 6A · LangGraph 的暂停、恢复与审批
 
+> **1A细度源码精讲（2026-09-19补充）：** [examples/approval_graph.py](../code/examples--approval_graph_py.md) · [tests/test_integrations.py](../code/tests--test_integrations_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
+
 [全部课程](../course/index.md) · [上一课](05c-postgres-cache.md) · [下一课](06b-authorized-tools.md)
 
 - **前置理解：** 阶段 5；理解服务端身份与副作用

@@ -1,5 +1,7 @@
 # 1D · CLI、工程配置与测试
 
+> **1A细度源码精讲（2026-09-19补充）：** [pyproject.toml](../code/pyproject_toml.md) · [tests/test_search.py](../code/tests--test_search_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
+
 [全部课程](../course/index.md) · [上一课](01c-lexical-search.md) · [下一课](01e-evaluation.md)
 
 - **学习进度：** 已完成（基础目标验收）。回归、异常、参数化、CLI 解析纠错及输出通道检查均有概念回答或实操反馈；详见文末小结，不代表阶段 1 或所有边界已验收。

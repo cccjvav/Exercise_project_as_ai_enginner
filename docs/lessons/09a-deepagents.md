@@ -1,5 +1,7 @@
 # 9A · Deep Agents 与复杂任务边界
 
+> **1A细度源码精讲（2026-09-19补充）：** [examples/deep_research.py](../code/examples--deep_research_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
+
 [全部课程](../course/index.md) · [上一课](08b-portfolio.md) · [下一课](09b-mcp.md)
 
 - **前置理解：** 阶段 8；可选，不是主线毕业必需
