@@ -85,4 +85,4 @@ tools/check_course.py 本地链接、源码同步与语法校验
 - 调试提供命令、完整错误栈、预期和实际，不提供密钥或个人信息。
 - 不将真实企业文件直接用于演示；模型调用、追踪和评测外发均需授权及预算确认。
 - 不编造指标；fixture 只解释机制，不能当作真实模型效果。
-- 所有工作位于 `arena/01a0981c-exercise-project-as-ai-enginne`，不自动修改远程 main。
+- 2026-09-23 起所有工作位于 `arena/01a0cb38-exercise-project-as-ai-enginne`（此前为 `arena/01a0981c-…`），不自动修改远程 main。
