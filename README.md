@@ -6,6 +6,7 @@
 
 ## 现在从哪里开始？
 
+- **[导师接手须知：学习者偏好的教学方式（skill）](skills/evidencedesk-tutor/SKILL.md)** — 接手辅导的助手先读；示例先行、逐行讲差异、即兴单题、答后归档并推送。真实对话样本见[第二阶段对话记录](第二阶段时用户与助手对话部分记录.md)。
 - **[零预算方案与本轮实际执行结果](docs/course/zero-budget.md)** — Agnes 免费型号、真实 PostgreSQL、公开资料和逐步云部署。
 - **[全部课程目录](docs/course/index.md)** — 22 节完整小课、顺序和阶段验收要求。
 - **[当前学习：2A 分块、来源与幂等更新](docs/lessons/02a-chunks-versions.md)** — 阶段 1 基础验收通过，已确认进入阶段 2。
