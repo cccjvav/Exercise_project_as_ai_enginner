@@ -2,7 +2,7 @@
 
 > **1A细度源码精讲（2026-09-19补充）：** [examples/agnes_rag.py](../code/examples--agnes_rag_py.md) · [examples/live_rag.py](../code/examples--live_rag_py.md) · [src/evidencedesk/agnes.py](../code/src--evidencedesk--agnes_py.md) · [tests/test_agnes.py](../code/tests--test_agnes_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
 
-[全部课程](../course/index.md) · [上一课](03a-vector-geometry.md) · [下一课](04a-hybrid.md)
+[全部课程](../course/index.md) · [上一课](03a-vector-geometry.md) · [下一课](03c-integrate-answer-api.md)
 
 - **前置理解：** 3A；账户预算、模型可用性与数据外发同意
 - **验证状态：** 提供完整在线参考脚本；语法/导入可检查，未发起付费模型调用。

@@ -2910,7 +2910,7 @@
     {
       "source": "tools/check_course.py",
       "page": "docs/code/tools--check_course_py.md",
-      "sha256": "2a459905e99b2ec0e572d2ca5d980f3e79f2cc6bf2a6d0e2cb4de5573005b2ae",
+      "sha256": "9e733233f56e7d0a4276efa766f3e61f91da65edf3967025d1752d7a9f4788ea",
       "line_count": 42,
       "explained_lines": [
         1,

@@ -35,8 +35,8 @@ def main():
     for path in [*(ROOT / "src").rglob("*.py"), *(ROOT / "examples").glob("*.py"), *(ROOT / "tests").glob("*.py")]:
         ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
     lessons = list((ROOT / "docs/lessons").glob("[0-9][0-9][a-z]-*.md"))
-    assert len(lessons) == 22, len(lessons)
-    print(f"PASS: 22 lessons; {count} embedded source copies match; local links and Python syntax valid")
+    assert len(lessons) == 28, len(lessons)
+    print(f"PASS: 28 lessons; {count} embedded source copies match; local links and Python syntax valid")
 
 if __name__ == "__main__":
     main()

@@ -2,7 +2,7 @@
 
 > **1A细度源码精讲（2026-09-19补充）：** [examples/vector_geometry.py](../code/examples--vector_geometry_py.md) · [tests/test_integrations.py](../code/tests--test_integrations_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
 
-[全部课程](../course/index.md) · [上一课](02b-pdf-tokens.md) · [下一课](03b-live-rag.md)
+[全部课程](../course/index.md) · [上一课](02c-corpus-holdout.md) · [下一课](03b-live-rag.md)
 
 - **前置理解：** 阶段 2；掌握块身份与来源
 - **验证状态：** 真实 Qdrant 本地模式已测；向量为手写几何样例，不是语义模型效果。

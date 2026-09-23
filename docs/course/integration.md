@@ -35,6 +35,8 @@ PostgreSQL：身份关联、版本、审批、状态；Qdrant：块向量和过�
 
 下面是阶段完成时的集成任务，不是现在要求你独立实现。导师会按照现有课的完整示例逐段带做；验收未通过不得将组件测试当最终集成通过。
 
+**2026-09-23 起这些任务有了课时与门槛**（见[修订记录](course-revision-2026-09-23.md)）：第 1–2 项对应 [3C](../lessons/03c-integrate-answer-api.md)，第 3 项对应 [5D](../lessons/05d-integrate-identity-postgres.md)，第 4 项对应 [6C](../lessons/06c-integrate-ticket-flow.md)，第 5 项对应 [7C](../lessons/07c-integrate-regression-gate.md)，第 6 项仍在 [8A](../lessons/08a-deploy-ci.md)；混合检索接入主线与真实消融在 [4C](../lessons/04c-integrate-hybrid-ablation.md)。语料与保留集先在 [2C](../lessons/02c-corpus-holdout.md) 建立。
+
 1. **阶段 2→3：** 将 live_rag 的整文输入替换为 chunks 输出；Qdrant payload 保存块 ID/父ID/版本/来源。保持现有文档级题集，以父 ID 评测；另外验证块级引用偏移。新旧索引版本用不同活动指针，失败不切换。
 2. **阶段 3→5：** 先保留 `/api/search` 作为确定性检索对照，再增加 `/api/answer`。服务端身份传入检索器，不能先全库在线生成再过滤。LLM 失败应返回可诊断错误而非“没有答案”。API 的请求取消需向在线模型任务传播。
 3. **阶段 5：** 将固定演示令牌替换为可信 OIDC/JWT 验证和数据库 ACL；完成双向越权、撤权、来源读取、缓存、日志隔离测试后，才允许导入真实授权资料。RLS 测试必须用实际应用角色，不用管理员。

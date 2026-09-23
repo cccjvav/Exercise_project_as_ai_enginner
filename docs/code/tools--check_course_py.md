@@ -6,7 +6,7 @@
 
 ## 先知道它解决什么问题
 
-让教材中的完整源码与仓库保持一致，并检查本地导航和22课数量；不自动评判教学细度。
+让教材中的完整源码与仓库保持一致，并检查本地导航和28课数量；不自动评判教学细度。
 
 ### 输入、输出与调用关系
 
@@ -59,8 +59,8 @@ def main():
     for path in [*(ROOT / "src").rglob("*.py"), *(ROOT / "examples").glob("*.py"), *(ROOT / "tests").glob("*.py")]:
         ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
     lessons = list((ROOT / "docs/lessons").glob("[0-9][0-9][a-z]-*.md"))
-    assert len(lessons) == 22, len(lessons)
-    print(f"PASS: 22 lessons; {count} embedded source copies match; local links and Python syntax valid")
+    assert len(lessons) == 28, len(lessons)
+    print(f"PASS: 28 lessons; {count} embedded source copies match; local links and Python syntax valid")
 
 if __name__ == "__main__":
     main()
@@ -467,10 +467,10 @@ def main():
 ### 第 38 行
 
 ```python
-    assert len(lessons) == 22, len(lessons)
+    assert len(lessons) == 28, len(lessons)
 ```
 
-**语法与数据变化：** 要求恰好22，失败时显示实际数量。
+**语法与数据变化：** 要求恰好28（2026-09-23 修订后），失败时显示实际数量。
 
 **为什么与边界：** 课程数正确不说明每课已学或已验收。
 
@@ -478,7 +478,7 @@ def main():
 ### 第 39 行
 
 ```python
-    print(f"PASS: 22 lessons; {count} embedded source copies match; local links and Python syntax valid")
+    print(f"PASS: 28 lessons; {count} embedded source copies match; local links and Python syntax valid")
 ```
 
 **语法与数据变化：** 输出本次实际副本数和检查范围。

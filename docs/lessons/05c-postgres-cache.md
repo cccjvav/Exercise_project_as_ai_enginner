@@ -2,7 +2,7 @@
 
 > **1A细度源码精讲（2026-09-19补充）：** [deploy/schema.sql](../code/deploy--schema_sql.md) · [examples/cache_scope.py](../code/examples--cache_scope_py.md) · [tools/fetch_public_manuals.py](../code/tools--fetch_public_manuals_py.md) · [tools/local_postgres.py](../code/tools--local_postgres_py.md) · [tools/postgres_lab.py](../code/tools--postgres_lab_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
 
-[全部课程](../course/index.md) · [上一课](05b-typescript-ui.md) · [下一课](06a-langgraph.md)
+[全部课程](../course/index.md) · [上一课](05b-typescript-ui.md) · [下一课](05d-integrate-identity-postgres.md)
 
 - **前置理解：** 5A；理解认证与授权区别
 - **验证状态：** 缓存键与本地 PostgreSQL 18.4 的 documents RLS 已实测。完整复现见 [零预算执行记录](../course/zero-budget.md)，托管云数据库仍未创建。

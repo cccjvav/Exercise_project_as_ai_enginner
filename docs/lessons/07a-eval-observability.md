@@ -2,7 +2,7 @@
 
 > **1A细度源码精讲（2026-09-19补充）：** [examples/judge_answer.py](../code/examples--judge_answer_py.md) · [examples/langsmith_metrics.py](../code/examples--langsmith_metrics_py.md) · [examples/trace_allowlist.py](../code/examples--trace_allowlist_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
 
-[全部课程](../course/index.md) · [上一课](06b-authorized-tools.md) · [下一课](07b-memory.md)
+[全部课程](../course/index.md) · [上一课](06c-integrate-ticket-flow.md) · [下一课](07b-memory.md)
 
 - **前置理解：** 阶段 6；已有检索基线和实际候选答案
 - **验证状态：** 离线遥测已运行；Ragas/托管 LangSmith 参考示例未发起在线调用。

@@ -2,7 +2,7 @@
 
 ## 0. 教材完成与学习进度是两回事
 
-现在有 9 阶段、22 节完整小课。第一课保留细粒度逐行说明；后续每课都附完整代码、就近注释及行号对照，复杂的相邻语句按同一数据动作解释。参考代码都已给出，你不需要先独立写实现。
+现在有 9 阶段、28 节小课（22 节完整教材；2C/3C/4C/5D/6C/7C 为 2026-09-23 新增骨架，进入前补齐，见[修订记录](course-revision-2026-09-23.md)）。第一课保留细粒度逐行说明；后续每课都附完整代码、就近注释及行号对照，复杂的相邻语句按同一数据动作解释。参考代码都已给出，你不需要先独立写实现。
 
 **当前进度：阶段 1（1A–1E）基础验收通过，已确认进入阶段 2，2A 进行中。** 跑完导师的测试不代表你已经理解后续阶段。每课只需给出运行结果、一个预测和一段解释；阶段末确认后再继续。
 
@@ -38,8 +38,14 @@ python -m pytest tests/test_search.py -q
 | 1A | 无 | 完全离线 |
 | 1B–2A、4A 的公式、5C 缓存、6B、7B、8B | `.[dev]` | 首次安装 pytest 需网络，运行不需模型 |
 | 2B | `.[ingest]` | PyPDF 本地；tiktoken 首次可能下载编码表 |
+| 2C | 无新增 | 语料生成与标注离线完成 |
 | 3A | `.[vector]` | Qdrant 本地内存模式，无远端服务 |
-| 3B | `.[llm,vector]` | 在线 embedding/chat，会外发文本并产生费用 |
+| 3B | `.[llm,vector]` | 在线 embedding/chat；按 2026-09-23 决定走免费 API（Agnes / Gemini 免费层 / Groq），只外发虚构语料，限额以后台为准 |
+| 3C | `.[web,llm,vector]` | 主线 API 接免费模型；无密钥测试用假模型 |
+| 4C | `.[dev]` + `jieba` | 中文分词本地；消融用 3C 的模型配置 |
+| 5D | `.[web]` + JWT 库 + PostgreSQL 驱动 | 本地或 Neon Free 数据库；令牌本地签发 |
+| 6C | `.[workflow,web]` + PostgreSQL checkpointer | 模拟外部工单 API 本地运行 |
+| 7C | `.[dev]`；在线层另配裁判模型 | 门禁分无密钥层与在线层 |
 | 4B 真实对照 | `sentence-transformers` 与 `.[llm]` | 模型下载、RAM/磁盘需求、可选 GPU；查询改写会付费 |
 | 5A/5B | `.[web,dev]` 与 Node.js 22 | `npm --prefix frontend ci` 后编译；API 不调用 LLM |
 | 5C PostgreSQL | 本机已有 PostgreSQL/psql | 专用实验数据库，未包含自动创建数据库的脚本 |

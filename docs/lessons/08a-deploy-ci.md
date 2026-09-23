@@ -2,7 +2,7 @@
 
 > **1A细度源码精讲（2026-09-19补充）：** [.github/workflows/course.yml](../code/_github--workflows--course_yml.md) · [deploy/Dockerfile](../code/deploy--Dockerfile.md) · [tests/test_space_export.py](../code/tests--test_space_export_py.md) · [tools/check_course.py](../code/tools--check_course_py.md) · [tools/export_space.py](../code/tools--export_space_py.md) · [tools/sync_course_sources.py](../code/tools--sync_course_sources_py.md)。逐行页补充下文的概括表；本课任务和历史问答不变。
 
-[全部课程](../course/index.md) · [上一课](07b-memory.md) · [下一课](08b-portfolio.md)
+[全部课程](../course/index.md) · [上一课](07c-integrate-regression-gate.md) · [下一课](08b-portfolio.md)
 
 - **前置理解：** 阶段 7；Node.js 22、Python 3.11；Docker 为本地可选前提
 - **验证状态：** 本机测试和 TS 构建已运行；当前环境无 Docker，镜像/云部署与 GitHub 远端检查另行验收。
