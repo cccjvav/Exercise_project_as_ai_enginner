@@ -45,7 +45,7 @@
 ### 2.2 教学循环的两处补充（不改变示例先行的方式）
 
 1. **闭卷小实现：** 从 2A 剩余部分起，每课收尾前一道 10–20 行的小实现。导师给函数签名、docstring 和测试；学习者写函数体，测试通过后再看参考实现。阶段 5 起升级为"先口述设计再看示例"，阶段 6 写一个图节点，阶段 8 自己拼装。
-2. **学习者自己提交：** 从阶段 2 起，`scratch_*.py`、`tests/test_learning_*.py` 和闭卷小实现由学习者在自己的分支提交并写提交信息；导师通过 diff 复核。导师仍负责教材归档的提交。
+2. **练习文件由导师代建（2026-09-24 按学习者要求修订）：** `scratch_*.py`、`tests/test_learning_*.py` 与闭卷小实现的文件创建、运行、提交、推送全部由导师完成；学习者只需在对话里给出代码或答案。原先"学习者自己提交"的安排取消，Git 练习改为按需、由学习者自愿选择，不作为验收项。
 
 ### 2.3 模型路线（学习者选择：免费 API）
 
@@ -76,7 +76,11 @@
 
 - 新增：本文件；`docs/lessons/02c-*.md`、`03c-*.md`、`04c-*.md`、`05d-*.md`、`06c-*.md`、`07c-*.md`（骨架）。
 - 更新：`README.md`、`docs/course/index.md`、`docs/roadmap.md`、`docs/course/integration.md`、`docs/course/setup.md`、`docs/course/verification.md`、`docs/course/zero-budget.md`（顶部决定）、相邻课程的上一课/下一课链接、`tools/check_course.py`（课数 22→28）及其精讲页与 `docs/code/manifest.json` 哈希、`skills/evidencedesk-tutor/SKILL.md`（补充闭卷小实现与自提交）。
-- 未改动：任何 `src/`、`examples/`、`tests/`、`data/` 文件。
+- 未改动：任何 `src/`、`examples/`、`data/` 文件；`tests/` 只新增导师提供的 `tests/test_learning_02a.py`（缺少实现时跳过）。
+
+### 2026-09-24 追加
+
+学习者明确要求：**新建的文档和练习文件由导师直接创建、运行、提交并推送**，不再让学习者复制粘贴或执行 Git 命令。闭卷小实现仍由学习者写函数体，但以聊天消息提交，导师代建文件并反馈测试结果；Git 操作从验收项改为可选练习。
 
 ## 4. 仍然未验证、不冒充完成的事
 
