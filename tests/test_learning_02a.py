@@ -1,13 +1,30 @@
 """2A 闭卷小实现：分块区间的测试（导师提供；学习者只写实现，不改本文件）。
 
 运行：python -m pytest tests/test_learning_02a.py -q
-尚未创建实现文件时，本文件整体跳过，CI 保持通过。
+scratch_02a_ranges.py 已由导师预建；其中 chunk_ranges 仍是骨架（抛 NotImplementedError）时，
+本文件整体跳过，CI 保持通过。
 """
 import pytest
 
 module = pytest.importorskip("scratch_02a_ranges")
 chunk_ranges = getattr(module, "chunk_ranges", None)
-pytestmark = pytest.mark.skipif(chunk_ranges is None, reason="chunk_ranges 尚未实现")
+
+
+def _still_pending(func) -> bool:
+    """骨架文件里的 NotImplementedError 视为"尚未实现"，整份测试跳过。"""
+    if func is None:
+        return True
+    try:
+        func(10, 4, 2)
+    except NotImplementedError:
+        return True
+    except Exception:
+        return False  # 实现有 bug 时让测试正常失败，而不是跳过
+    return False
+
+
+if _still_pending(chunk_ranges):
+    pytest.skip("chunk_ranges 尚未实现", allow_module_level=True)
 
 
 def test_default_parameters_on_sample_length():
