@@ -85,7 +85,7 @@ for chunk in chunks(doc, size=4, overlap=1):
 
 重叠可以保留部分边界上下文，但原文长度不变，不代表各块包含的字符总数不变。这次只观察这一取舍，不修改生产实现、检索器或评测集，也不把它当作 q06/q09 已改善的证据。
 
-1. 使用仓库根目录预建好的 `scratch_overlap.py`（也可以按下面代码自己改）：
+1. 这一步已完成。下面的代码与预期输出保留作复习；仓库不长期保留 scratch 文件，需要复跑时告诉导师重新生成：
 
 ```python
 from evidencedesk.documents import Document
@@ -171,7 +171,7 @@ demo demo.md
 
 前四题都用手工构造的 `ABCDEFGHIJ`。这一步换成仓库里的真实手册，并第一次使用 `chunks` 的默认参数 `size=120, overlap=20`，做同样的定位验证。
 
-仓库根目录已提供 `scratch_locate.py`（导师预建，可直接运行或自行修改）：
+当时在仓库根目录预建了 `scratch_locate.py`，运行后已随本题验收删除；下面的代码与预期输出保留作复习：
 
 ```python
 from pathlib import Path
@@ -189,7 +189,7 @@ print(part["parent_id"], part["source"], part["start"], part["end"])
 assert doc.text[part["start"]:part["end"]] == part["text"]
 ```
 
-运行 `python scratch_locate.py`，预期输出：
+当时运行的输出为（`python scratch_locate.py`）：
 
 ```text
 api-key-policy 243
@@ -207,14 +207,14 @@ api-key-policy api-key-policy.md 100 220
 
 ## 本课的练习文件（导师预建，直接改）
 
-| 文件 | 用途 | 对应问答 |
+| 文件 | 用途 | 状态 |
 |---|---|---|
-| `scratch_overlap.py` | 比较 overlap=0/1/2 的块数与字符总数 | 2A-Q3 |
-| `scratch_locate.py` | 在真实手册上定位一个块并断言切片一致 | 2A-Q5 |
-| `scratch_replace.py` | `replace_document` 前后索引条数、父文档数 | 2A-Q7 |
-| `scratch_02a_ranges.py` | 闭卷小实现 `chunk_ranges` 的骨架 | 待完成 |
+| `scratch_overlap.py` | 比较 overlap=0/1/2 的块数与字符总数 | 2A-Q3 已完成，代码保留在正文，文件不长期入库 |
+| `scratch_locate.py` | 在真实手册上定位一个块并断言切片一致 | 2A-Q5 已完成，文件已在验收后删除 |
+| `scratch_replace.py` | `replace_document` 前后索引条数、父文档数 | 2A-Q7 已完成，文件已在验收后删除 |
+| `scratch_02a_ranges.py` | 闭卷小实现 `chunk_ranges` 的骨架 | 进行中，直接改写 |
 
-前三个可直接运行（`python scratch_xxx.py`）。最后一个已建好骨架，把 `chunk_ranges` 里的 `raise NotImplementedError` 换成实现，再运行 `python -m pytest tests/test_learning_02a.py -q`；骨架未改写前该测试整体跳过，不影响 CI。学习者不需要新建文件或复制粘贴代码。
+**生命周期：** scratch 文件只在对应小课进行期间入库，方便你直接修改和运行；该小课的验收小结完成后由导师删除，代码与预期输出已保留在正文和归档里，需要复跑时说一声即可重新生成。这样仓库根目录不会被十几个一次性脚本长期占据。
 
 ## 1. 问题：现在为什么需要它？
 
